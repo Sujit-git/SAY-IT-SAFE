@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/Say-It-Safe/static/js/main.cbb7590d.chunk.js",
+    "main.js.map": "/Say-It-Safe/static/js/main.cbb7590d.chunk.js.map",
+    "runtime-main.js": "/Say-It-Safe/static/js/runtime-main.eae9b49b.js",
+    "runtime-main.js.map": "/Say-It-Safe/static/js/runtime-main.eae9b49b.js.map",
+    "static/js/2.f2d1ed59.chunk.js": "/Say-It-Safe/static/js/2.f2d1ed59.chunk.js",
+    "static/js/2.f2d1ed59.chunk.js.map": "/Say-It-Safe/static/js/2.f2d1ed59.chunk.js.map",
+    "index.html": "/Say-It-Safe/index.html",
+    "static/js/2.f2d1ed59.chunk.js.LICENSE.txt": "/Say-It-Safe/static/js/2.f2d1ed59.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.eae9b49b.js",
+    "static/js/2.f2d1ed59.chunk.js",
+    "static/js/main.cbb7590d.chunk.js"
+  ]
+}
