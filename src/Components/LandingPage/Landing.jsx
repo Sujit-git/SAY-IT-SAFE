@@ -1,14 +1,37 @@
+import { Button } from "@material-ui/core";
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 
 const Landing = () => {
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
-    <Router>
+    <BrowserRouter>
       <div className="landing">
-        <Link to="/signin">Sign IN</Link> <br />
-        <Link to="/signup">Sign Up</Link>
+        <p id="welcome">Welcome to</p>
+
+        <h1 className="heading">SAY-IT-SAFE</h1>
+
+        <h3 className="description">
+          A platform for students/employees to raise their issues/complaints
+          anonymously.
+        </h3>
+
+        <Button onClick={refreshPage}>
+          <Link to="/signin">
+            <li> Sign IN</li>
+          </Link>{" "}
+        </Button>
+        <br />
+        <Button onClick={refreshPage}>
+          <Link to="/signup">
+            <li>Sign UP</li>
+          </Link>
+        </Button>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 

@@ -1,21 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 import Landing from "./Components/LandingPage/Landing";
-import signin from "./Components/SignIn/signin";
-import signup from "./Components/SignUp/signup";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SignIn from "./Components/SignIn/signin";
+import SignUp from "./Components/SignUp/signup";
+import HomePage from "./Components/Home/HomePage";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPass";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import fire from "./config/firebase";
 
-const App = () => {
-  return (
-    <Router>
-      <Switch>
-        <div>
-          <Route exact path="/" component={Landing} />
-          <Route path="/signin" component={signin} />
-          <Route path="/signup" component={signup} />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {},
+    };
+  }
+  componentDidMount() {
+    this.authListener();
+  }
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
+      }
+    });
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="app">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={this.state.user ? HomePage : Landing}
+            />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/homepage" component={HomePage} />
+            <Route path="/forgotpassword" component={ForgotPassword} />
+          </Switch>
         </div>
-      </Switch>
-    </Router>
-  );
-};
-
+      </BrowserRouter>
+    );
+  }
+}
 export default App;
