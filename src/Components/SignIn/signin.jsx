@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Nav } from "react-bootstrap";
 import { Link, BrowserRouter as Router, useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -103,14 +104,14 @@ const SignIn = () => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Button onClick={refreshPage}>
+                  <Nav.Link onClick={refreshPage}>
                     <Link to="/forgotpassword">Forgot password?</Link>
-                  </Button>
+                  </Nav.Link>
                 </Grid>
                 <Grid item>
-                  <Button onClick={refreshPage}>
+                  <Nav.Link onClick={refreshPage}>
                     <Link to="/signup">Don't have an account? Sign Up</Link>
-                  </Button>
+                  </Nav.Link>
                 </Grid>
               </Grid>
             </form>

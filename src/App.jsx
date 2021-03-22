@@ -3,7 +3,9 @@ import Landing from "./Components/LandingPage/Landing";
 import SignIn from "./Components/SignIn/signin";
 import SignUp from "./Components/SignUp/signup";
 import HomePage from "./Components/Home/HomePage";
+import About from "./Components/docs/About";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPass";
+import Contact from "./Components/Contact/Contact";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import fire from "./config/firebase";
 
@@ -41,6 +43,8 @@ class App extends Component {
             <Route path="/signup" component={SignUp} />
             <Route path="/homepage" component={HomePage} />
             <Route path="/forgotpassword" component={ForgotPassword} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/about" component={About} />
           </Switch>
         </div>
       </BrowserRouter>

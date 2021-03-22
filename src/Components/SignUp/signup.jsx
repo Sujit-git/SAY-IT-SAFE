@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Nav } from "react-bootstrap";
 import { Link, BrowserRouter as Router, useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -158,10 +159,9 @@ const SignUp = () => {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Button onClick={refreshPage}>
+                  <Nav.Link onClick={refreshPage}>
                     <Link to="/signin">Already have an account? Sign in</Link>
-                  </Button>
-                  {/* <Link to="/signin">Already have an account? Sign in</Link> */}
+                  </Nav.Link>
                 </Grid>
               </Grid>
             </form>
