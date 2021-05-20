@@ -1,33 +1,38 @@
 import React from "react";
 import clsx from "clsx";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-// import List from "@material-ui/core/List";
+import List from "@material-ui/core/List";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-// import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
+import QuestionAnswerTwoToneIcon from "@material-ui/icons/QuestionAnswerTwoTone";
+import AllInboxOutlinedIcon from "@material-ui/icons/AllInboxOutlined";
+import RecentActorsOutlinedIcon from "@material-ui/icons/RecentActorsOutlined";
+import GradeTwoToneIcon from "@material-ui/icons/GradeTwoTone";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import useStyles from "./Styles";
-// import { mainListItems, secondaryListItems } from "./listItems";
-// import Chart from "./Chart";
-// import Deposits from "./Deposits";
-// import Orders from "./Orders";
+import InfoIcon from "@material-ui/icons/Info";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import { Nav } from "react-bootstrap";
+import useStyles from "./Styles";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 import fire from "../../config/firebase";
 import { Button } from "antd";
+import logo from "../../assets/favicon.png";
 
 const Dashboard = () => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const logout = () => {
     fire
@@ -38,99 +43,151 @@ const Dashboard = () => {
         cogoToast.success("User Logged Out Successfully");
       });
   };
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const itemsList1 = [
+    {
+      text: "Raise a Question",
+      icon: <QuestionAnswerTwoToneIcon />,
+      onClick: () => history.push("/askquestion"),
+    },
+    {
+      text: "Bookmark",
+      icon: <GradeTwoToneIcon />,
+      onClick: () => history.push("/askquestion"),
+    },
+    {
+      text: "About",
+      icon: <InfoIcon />,
+      onClick: () => history.push("/about"),
+    },
+  ];
+
+  const itemsList2 = [
+    {
+      text: "All Questions",
+      icon: <AllInboxOutlinedIcon />,
+      onClick: () => history.push("/allquestions"),
+    },
+    {
+      text: "Contact Us",
+      icon: <RecentActorsOutlinedIcon />,
+      onClick: () => history.push("/contact"),
+    },
+    {
+      text: "Account Details",
+      icon: <AccountCircleIcon />,
+      onClick: () => history.push("/profile"),
+    },
+  ];
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
       >
-        <Toolbar className={classes.toolbar}>
+        <Toolbar>
           <IconButton
-            edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard
+          <Typography variant="h6" noWrap>
+            <img alt="logo" src={logo} height="30px" />
+            <Typography
+              variant="h6"
+              display="inline"
+              style={{ marginLeft: "10px", borderBottom: "solid" }}
+            >
+              Say-It-Safe
+            </Typography>
           </Typography>
-
-          <IconButton color="inherit">
-            <Badge color="secondary">
-              <Nav.Link>
-                <Button
-                  style={{ width: "100px", height: "50px", fontSize: "16px" }}
-                  type="primary"
-                  danger
-                  onClick={logout}
-                >
-                  <AccountCircleIcon /> Logout
-                </Button>
-              </Nav.Link>
-            </Badge>
-          </IconButton>
+          <Nav.Link>
+            <Button
+              style={{
+                width: "100px",
+                height: "30px",
+                fontSize: "16px",
+                float: "right",
+                marginLeft: "1450px",
+              }}
+              type="primary"
+              danger
+              onClick={logout}
+            >
+              <AccountCircleIcon /> Logout
+            </Button>
+          </Nav.Link>
         </Toolbar>
       </AppBar>
       <Drawer
         variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
         }}
-        open={open}
       >
-        <div className={classes.toolbarIcon}>
+        <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            {theme.direction === "rtl" ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
-        {/* <List>{mainListItems}</List> */}
+        <List>
+          {itemsList1.map((item, index) => {
+            const { text, icon, onClick } = item;
+            return (
+              <ListItem button key={text} onClick={onClick}>
+                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                <ListItemText primary={text} />
+              </ListItem>
+            );
+          })}
+        </List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
+        <List>
+          {itemsList2.map((item, index) => {
+            const { text, icon, onClick } = item;
+            return (
+              <ListItem button key={text} onClick={onClick}>
+                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                <ListItemText primary={text} />
+              </ListItem>
+            );
+          })}
+        </List>
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                {/* <Chart /> */}You are Logged In
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
-            </Grid>
-          </Grid>
-        </Container>
+        <div className={classes.toolbar} />
+        {/* <Typography paragraph>Welcome to SAY-IT-SAFE</Typography>
+        <Typography paragraph>You Are Logged In...!!!</Typography> */}
       </main>
     </div>
   );

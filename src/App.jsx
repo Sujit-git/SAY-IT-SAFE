@@ -6,8 +6,12 @@ import HomePage from "./Components/Home/HomePage";
 import About from "./Components/docs/About";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPass";
 import Contact from "./Components/Contact/Contact";
+import AskQuestion from "./Components/Question/AskQuestion";
+import Account from "./Components/Account/Account";
+import AllQuestions from "./Components/AllQuestions/AllQuestions";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import fire from "./config/firebase";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -45,6 +49,9 @@ class App extends Component {
             <Route path="/forgotpassword" component={ForgotPassword} />
             <Route path="/contact" component={Contact} />
             <Route path="/about" component={About} />
+            <Route path="/askquestion" component={AskQuestion} />
+            <Route path="/profile" component={Account} />
+            <Route path="/allquestions" component={AllQuestions} />
           </Switch>
         </div>
       </BrowserRouter>

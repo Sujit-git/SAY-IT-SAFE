@@ -24,6 +24,7 @@ const Footer = () => {
             <HeartFilled
               style={{
                 color: "#e75480 ",
+                fontSize: "20px",
               }}
             />{" "}
             By PBL Team!
